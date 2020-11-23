@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import { useImmer, useImmerReducer } from "use-immer"
 import { CSSTransition } from "react-transition-group"
 
 function Form() {
+  const formInput = useRef()
+  const formCheck = useRef()
+
   const [checked, setChecked] = useState(false)
 
   const [originalState, setOriginalState] = useImmer({
@@ -39,11 +42,12 @@ function Form() {
         }
         return
       case "submitForm":
-        setOriginalState((draft) => {
-          draft.success = false
-        })
         if (checked && !draft.email.hasErrors) {
+          setChecked(false)
+          formCheck.current.checked = false
+          formInput.current.value = ""
           setOriginalState((draft) => {
+            draft.formReady = false
             draft.success = true
           })
         }
@@ -57,17 +61,6 @@ function Form() {
       return () => clearTimeout(delay)
     }
   }, [state.email.value])
-
-  useEffect(() => {
-    setOriginalState((draft) => {
-      draft.formReady = false
-    })
-    if (checked) {
-      setOriginalState((draft) => {
-        draft.formReady = true
-      })
-    }
-  }, [checked])
 
   function submitHandler(e) {
     e.preventDefault()
@@ -88,7 +81,7 @@ function Form() {
           <div className="col-sm-12 col-md-8">
             <div className="form-group">
               <label htmlFor="email">E-Mail Adresse</label>
-              <input type="email" className="form-control" id="email" placeholder="example@email.com" aria-describedby="emailHelp" onChange={(e) => dispatch({ type: "emailImmediately", value: e.target.value })} />
+              <input type="email" ref={formInput} className="form-control" id="email" placeholder="example@email.com" aria-describedby="emailHelp" onChange={(e) => dispatch({ type: "emailImmediately", value: e.target.value })} />
               <CSSTransition in={state.email.hasErrors} timeout={330} classNames="liveValidateMessage" unmountOnExit>
                 <small className="text-danger liveValidateMessage">{state.email.message}</small>
               </CSSTransition>
@@ -98,21 +91,14 @@ function Form() {
         <div className="row">
           <div className="col-sm-12 col-md-8">
             <div className="form-group form-check">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id="check"
-                onChange={(e) => {
-                  setChecked(e.target.checked)
-                }}
-              />
+              <input type="checkbox" ref={formCheck} className="form-check-input" id="check" value={checked} onChange={() => setChecked((checked) => !checked)} />
               <label className="form-check-label" htmlFor="check">
                 <small> Durch das Absenden des Formulars wird das komplette Internet gelöscht. Ich bin mir über die Konsequenzen bewusst und bestätige, dass ich diesen Hinweis aufmerksam gelesen habe.</small>
               </label>
             </div>
           </div>
         </div>
-        <button type="submit" className="btn btn-primary btn-sm" disabled={!originalState.formReady}>
+        <button type="submit" className="btn btn-primary btn-sm" disabled={!checked}>
           Absenden
         </button>
       </form>

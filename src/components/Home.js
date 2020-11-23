@@ -3,7 +3,7 @@ import Form from "./Form"
 
 function Home() {
   return (
-    <div className="container my-5">
+    <div className="container my-5 h-full">
       <h2>
         Newsletter-Formular
         <small className="text-muted">
