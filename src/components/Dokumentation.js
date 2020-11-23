@@ -1,15 +1,25 @@
 import React from "react"
-import { CopyBlock, codepen } from "react-code-blocks"
+import { CodeBlock, codepen } from "react-code-blocks"
 
-const functionComponent = `function Welcome(props) {
-  return <h1>Hello, {props.name}</h1>;
-}`
-
-const classComponent = `class Welcome extends React.Component {
-  render() {
-    return <h1>Hello, {this.props.name}</h1>;
-  }
-}`
+const exampleCode = {
+  functionComponent: `function Welcome(props) {
+    return <h1>Hello, {props.name}</h1>;
+  }`,
+  classComponent: `class Welcome extends React.Component {
+    render() {
+      return <h1>Hello, {this.props.name}</h1>;
+    }`,
+  stateExample: `// declare a new state variable with default value of "0"
+  const [count, setCount] = useState(0);`,
+  effectExampleOne: `useEffect(() => {
+    // log the value of "count" on componentDidMount
+    console.log(count)
+  }, []);`,
+  effectExampleTwo: `useEffect(() => {
+    // log the value of "count" on componentDidUpdate
+    console.log(count)
+  }, [count]);`,
+}
 
 function Dokumentation() {
   return (
@@ -55,7 +65,7 @@ function Dokumentation() {
         </ul>
       </p>
 
-      <CopyBlock text={functionComponent} language={"jsx"} showLineNumbers={false} theme={codepen} />
+      <CodeBlock text={exampleCode.functionComponent} language={"jsx"} showLineNumbers={false} theme={codepen} />
 
       <p className="mt-3">
         <strong>Class Component</strong>
@@ -69,7 +79,7 @@ function Dokumentation() {
         </ul>
       </p>
 
-      <CopyBlock text={classComponent} language={"jsx"} showLineNumbers={false} theme={codepen} />
+      <CodeBlock text={exampleCode.classComponent} language={"jsx"} showLineNumbers={false} theme={codepen} />
 
       <p className="mt-3">Components können in andere components verschachtelt werden. Ebenso kann man function components und class components vermischen.</p>
 
@@ -92,7 +102,9 @@ function Dokumentation() {
       </p>
       <p className="alert alert-danger text-dark">Do Not Modify State Directly!</p>
       <p>
-        Die Philosophie von React besagt, dass states niemals direkt modifiziert werden sollen. <span className="text-muted">Weiterführende Themen: Unidirectioncal Data Flow, Functioncal Programmiung, Immutability</span>
+        Die Philosophie von React besagt, dass states niemals direkt modifiziert werden sollen.
+        <br />
+        <span className="text-muted">Weiterführende Themen: Unidirectioncal Data Flow, Functioncal Programmiung, Immutability</span>
       </p>
 
       <p>
@@ -127,7 +139,9 @@ function Dokumentation() {
         <code>useState</code> gibt den aktuellen Zustandswert und eine Funktion, mit der man diesen Zustand aktualisieren kann, zurück. Man kann diese Funktion von einem Event-Handler oder von einem anderen Ort aus aufrufen. Sie ist ähnlich wie <code>this.setState</code> in einer Klasse, nur dass sie den alten und den neuen Zustand nicht zusammenführt.
       </p>
 
-      <h5>useEffect()</h5>
+      <CodeBlock text={exampleCode.stateExample} language={"jsx"} showLineNumbers={false} theme={codepen} />
+
+      <h5 className="mt-3">useEffect()</h5>
       <p>
         Im Gegensatz zu <code>useState</code> kann man mit <code>useEffect</code> sogenannte "side effects" in function components ausführen.
       </p>
@@ -142,7 +156,21 @@ function Dokumentation() {
       <p>
         <code>useEffect</code> kombiniert die Lifecycle Methoden: <code>componentDidMount</code>, <code>componentDidUpdate</code> und <code>componentWillUnmount</code>.
       </p>
-      <p>Dem useEffect-Hook kann so beispielsweise ein Argument übergeben werden, dass es ermöglicht, diesen inital beim Laden der Komponente auszuführen oder ihn jedes Mal dann auszuführen, wenn sich ein bestimmer state verändert hat.</p>
+      <p>
+        Dem <code>useEffect</code>-Hook kann so beispielsweise ein Argument übergeben werden, dass es ermöglicht, diesen inital beim Laden der Komponente auszuführen oder ihn jedes Mal dann auszuführen, wenn sich ein bestimmer state verändert hat.
+      </p>
+
+      <p>
+        Wenn der zweite Parameter des <code>useEffect</code>-Hooks ein leeres Array ist, dann wird der Code beim Mounten der Komponente einmalig ausgeführt.{" "}
+      </p>
+
+      <CodeBlock text={exampleCode.effectExampleOne} language={"jsx"} showLineNumbers={false} theme={codepen} />
+
+      <p className="mt-3">
+        Wenn der zweite Parameter des <code>useEffect</code>-Hooks eine State-Variable ist, dann wird der Hook immer dann ausgeführt, wenn sich der Zustand der Variable ändert.{" "}
+      </p>
+
+      <CodeBlock text={exampleCode.effectExampleTwo} language={"jsx"} showLineNumbers={false} theme={codepen} />
 
       <hr className="my-5" />
 
