@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react"
 import { useImmer, useImmerReducer } from "use-immer"
-import { CSSTransition } from "react-transition-group"
 
 function Form() {
   const formInput = useRef()
@@ -19,7 +18,6 @@ function Form() {
       hasErrors: false,
       message: "",
     },
-    success: false,
   }
 
   const [state, dispatch] = useImmerReducer(ourReducer, initialState)
@@ -71,20 +69,18 @@ function Form() {
 
   return (
     <>
-      <CSSTransition in={originalState.success} timeout={330} classNames="alert" unmountOnExit>
+      {originalState.success && (
         <div className="alert alert-success" role="alert">
           Sie habe sich erfolgreich mit <strong>{state.email.value}</strong> registriert.
         </div>
-      </CSSTransition>
+      )}
       <form onSubmit={submitHandler} className="my-3">
         <div className="row mb-2">
           <div className="col-sm-12 col-md-8">
             <div className="form-group">
               <label htmlFor="email">E-Mail Adresse</label>
               <input type="email" ref={formInput} className="form-control" id="email" placeholder="example@email.com" aria-describedby="emailHelp" onChange={(e) => dispatch({ type: "emailImmediately", value: e.target.value })} />
-              <CSSTransition in={state.email.hasErrors} timeout={330} classNames="liveValidateMessage" unmountOnExit>
-                <small className="text-danger liveValidateMessage">{state.email.message}</small>
-              </CSSTransition>
+              <small className="text-danger liveValidateMessage">{state.email.message}</small>
             </div>
           </div>
         </div>
