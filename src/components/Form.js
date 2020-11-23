@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react"
-import { useImmer, useImmerReducer } from "use-immer"
+import { useImmerReducer } from "use-immer"
 
 function Form() {
   const formInput = useRef()
@@ -7,20 +7,17 @@ function Form() {
 
   const [checked, setChecked] = useState(false)
 
-  const [originalState, setOriginalState] = useImmer({
-    formReady: false,
-    success: false,
-  })
-
-  const initialState = {
+  const originalState = {
     email: {
       value: "",
       hasErrors: false,
       message: "",
     },
+    formReady: false,
+    success: false,
   }
 
-  const [state, dispatch] = useImmerReducer(ourReducer, initialState)
+  const [state, dispatch] = useImmerReducer(ourReducer, originalState)
 
   function ourReducer(draft, action) {
     // eslint-disable-next-line default-case
@@ -28,9 +25,7 @@ function Form() {
       case "emailImmediately":
         draft.email.hasErrors = false
         draft.email.value = action.value
-        setOriginalState((draft) => {
-          draft.success = false
-        })
+        draft.success = false
         return
       case "emailAfterDelay":
         const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -41,13 +36,11 @@ function Form() {
         return
       case "submitForm":
         if (checked && !draft.email.hasErrors) {
+          draft.success = true
+          draft.formReady = false
           setChecked(false)
           formCheck.current.checked = false
           formInput.current.value = ""
-          setOriginalState((draft) => {
-            draft.formReady = false
-            draft.success = true
-          })
         }
     }
     return
@@ -69,7 +62,7 @@ function Form() {
 
   return (
     <>
-      {originalState.success && (
+      {state.success && (
         <div className="alert alert-success" role="alert">
           Sie habe sich erfolgreich mit <strong>{state.email.value}</strong> registriert.
         </div>
