@@ -227,7 +227,7 @@ function Dokumentation() {
           </small>
         </li>
         <li>
-          <code>ngx create-react-app</code>
+          <code>npx create-react-app</code>
           <small>
             <em> &mdash; starter template installieren</em>
           </small>
