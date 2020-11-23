@@ -204,6 +204,41 @@ function Dokumentation() {
         </a>{" "}
         .
       </p>
+      <p>
+        Wem das <code>create-react-app</code>-Template zu unübersichtlich ist, kann dieses mit dem Package{" "}
+        <a href="https://github.com/adebayoileri/cleanup-create-react-app/#readme" target="_blank" rel="noopener noreferrer">
+          cleanup-create-react-app
+        </a>{" "}
+        unkompliziert aufräumen. Dabei werden unnötige Dateien entfernt. Es gibt auch ReactJS Boilerplates wie zum Beispiel{" "}
+        <a href="https://github.com/nano-react-app/nano-react-app" target="_blank" rel="noopener noreferrer">
+          nano-react-app
+        </a>
+        , die eine abgespeckte <code>create-react-app</code>-Variante zur Verfügung stellen.
+      </p>
+      <p>Der Workflow ist dann wie folgt:</p>
+      <ol>
+        <li>
+          <code>npm i -g cleanup-create-react-app</code>
+          <small>
+            <em>
+              {" "}
+              &mdash; <u>einmalig</u> global das Paket installieren
+            </em>
+          </small>
+        </li>
+        <li>
+          <code>ngx create-react-app</code>
+          <small>
+            <em> &mdash; starter template installieren</em>
+          </small>
+        </li>
+        <li>
+          <code>cleanup-create-react-app</code>
+          <small>
+            <em> &mdash; Projekt aufräumen lassen</em>
+          </small>
+        </li>
+      </ol>
     </div>
   )
 }
