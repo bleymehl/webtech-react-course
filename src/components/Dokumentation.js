@@ -23,14 +23,14 @@ const exampleCode = {
 
 function Dokumentation() {
   return (
-    <div className="container my-5">
+    <div className="container container--narrow my-5">
       <h2>
         Dokumentation <small className="text-muted">v.17.x.x</small>
       </h2>
       <hr />
 
-      <p className="lead mb-5">
-        Diese Dokumentation ist Teil eines React-Tutorials. Im Folgenden wird auf die wichtigstens Begriffe noch einmal eingangen. Diese Dokumentation versteht sich allerdings als nicht allumfassend. Für weitere Informationen empfehlen wir die{" "}
+      <p className="lead">
+        Diese Dokumentation ist Teil eines React-Tutorials. Im Folgenden wird auf die wichtigsten Begriffe noch einmal eingegangen. Diese Dokumentation versteht sich allerdings als nicht allumfassend. Für weitere Informationen empfehlen wir die{" "}
         <a href="https://reactjs.org/docs/getting-started.html" target="_blank" rel="noreferrer">
           React Dokumentation
         </a>{" "}
@@ -39,22 +39,23 @@ function Dokumentation() {
         Voraussetzung für dieses Tutorial sind grundlegende JavaScript- und HTML-Kenntnisse sowie ein Code-Editor (unsere Empfehlung: Visual Studio Code) und Node.js mit npm (node package manager).
       </p>
 
-      <h4>Was ist React?</h4>
+      <h4 className="mt-5">Was ist React?</h4>
 
       <p>React ist eine OpenSource JavaScript-Bibliothek von Facebook zur schnellen, modularen Entwicklung von User-Interfaces basierend auf Komponenten (wiederverwendbarer Code-Bausteine).</p>
 
-      <h4>Warum ist es popular? Welches Problem löst es?</h4>
+      <h4 className="mt-5">Warum ist es populär? Welches Problem löst es?</h4>
       <p>Mit React können wir unsere Daten außerhalb des DOM innerhalb eines virtuellen DOM aufbewahren, so dass die Arbeit mit den Daten einfach und blitzschnell vonstatten geht. </p>
-      <p>Wenn sich unsere Daten ändern, reagiert es ("react"), indem es nur genau die Teile des DOM neu rendert, die tatsächlich neu gerendert werden müssen, weil sie sich verändert haben.</p>
+      <p>Wenn sich unsere Daten ändern, reagiert es ("react"), indem es nur genau die Teile des DOM neu rendert, die tatsächlich neu gerendert werden müssen.</p>
       <p>Reacts LifecycleHooks sorgen dafür, dass die Komponenten automatisch geupdated werden, ohne dass der Nutzer manuell das Neuladen auslösen muss.</p>
 
-      <h4>JSX</h4>
+      <h4 className="mt-5">JSX</h4>
       <p>JSX (JavaScript + XML) ist eine Syntaxerweiterung, die es uns erlaubt, HTML in (React-) JavaScript zu schreiben. Dadurch ergibt sich der Vorteil, dass man die JavaScript-Funktionalität (z.B. Variablen, Funktionen, Eigenschaften usw.) direkt in das HTML schreiben kann.</p>
       <p className="alert alert-warning text-dark">
         Zu beachten ist, dass gewisse Keywords wie zum Beispiel <code>class</code> oder <code>for</code> bereits von JavaScript belegt sind und nicht im HTML als Tag-Attribut genutzt werden können. Hierfür müssen dann alternative Begriffe wie zum Beispiel <code>className</code> oder <code>htmlFor</code> genutzt werden.
       </p>
-      <h4>Components</h4>
-      <p>Mit Components können man die Benutzeroberfläche in unabhängige, wiederverwendbare Teile aufteilen und jedes Teil isoliert betrachten.</p>
+
+      <h4 className="mt-5">Komponenten</h4>
+      <p>Mit Komponenten (im Folgenden components) kann man die Benutzeroberfläche in unabhängige, wiederverwendbare Teile aufteilen und jedes Teil isoliert betrachten. In React gibt es hinsichtlich ihrer Erstellung sowie Funktionalität zwei Arten von components:</p>
       <p>
         <strong>Function Component</strong>
         <br />
@@ -72,7 +73,7 @@ function Dokumentation() {
         <br />
         <ul>
           <li>nutzt ES6-Funktionalität, um eine Class in JavaScript zu erzeugen</li>
-          <li>erweitert die React component class um eigene component subclass</li>
+          <li>erweitert die React component class um eigene component subclass und erbt damit auch deren Funktionalität</li>
           <li>
             dadurch muss auch eine <code>render()</code>-Methode innerhalb der Klasse aufgerufen werden
           </li>
@@ -81,21 +82,21 @@ function Dokumentation() {
 
       <CodeBlock text={exampleCode.classComponent} language={"jsx"} showLineNumbers={false} theme={codepen} />
 
-      <p className="mt-3">Components können in andere components verschachtelt werden. Ebenso kann man function components und class components vermischen.</p>
+      <p className="alert alert-info mt-3">Components können in andere components verschachtelt werden. Ebenso kann man function components und class components vermischen.</p>
 
-      <h4>Props</h4>
+      <h4 className="mt-5">Props</h4>
       <p>
         <strong>Props</strong> (properties) sind benutzerdefinierte Eigenschaften, die an Komponenten übergeben werden können. Sie erweitern damit die Funktionalität der Komponenten. Die prop-Werte können ausgelesen und weiterverarbeitet werden.
       </p>
       <p>Props werden einmalig beim Erstellen der Komponente dem Constructor übergeben und dürfen nicht verändert werden.</p>
       <p className="alert alert-danger text-dark">Props are Read-Only!</p>
 
-      <h4>States</h4>
+      <h4 className="mt-5">States</h4>
       <p>
         <strong>States</strong> lassen uns Daten einer Anwendung in den Speicher schreiben. Wenn sich der Zustand (state) der Komponente ändert, führt React automatisch ein erneutes Rendern der Komponente für uns durch, ohne dass wir die <strong>render()</strong>-Funktion erneut manuell aufrufen müssen.
       </p>
       <p>
-        Negativbeispiel: <code>setInterval()</code> ruft die <code>render()</code>-Funktion alle 1000 Milisekunden auf.
+        Negativbeispiel: <code>setInterval()</code> ruft die <code>render()</code>-Funktion alle 1000ms auf.
       </p>
       <p>
         Im Gegensatz zu <strong>props</strong> (one-way flow), können <strong>states</strong> geupdatet werden. Man kann sich unter <strong>states</strong> alle Daten vorstellen, die gespeichert und geändert werden sollen, ohne dass sie unbedingt in eine Datenbank aufgenommen werden müssen. Beispiel: das Hinzufügen und Entfernen von Artikeln aus einem Einkaufswagen vor der Bestätigung eines Kaufs.
@@ -104,21 +105,25 @@ function Dokumentation() {
       <p>
         Die Philosophie von React besagt, dass states niemals direkt modifiziert werden sollen.
         <br />
-        <span className="text-muted">Weiterführende Themen: Unidirectioncal Data Flow, Functioncal Programmiung, Immutability</span>
+        <span className="text-muted">Weiterführende Themen: Unidirectional Data Flow, Functional Programming, Immutability</span>
       </p>
 
-      <p>
-        Im Rahmen des Tutorials wird auf das Package{" "}
-        <strong>
-          <a href="https://github.com/immerjs/immer#readme" target="_blank" rel="noreferrer">
-            Immer
-          </a>
-        </strong>{" "}
-        zur State-Manipulation zurückgegriffen.
-      </p>
-      <blockquote className="blockquote">"Immer (German for: always) is a tiny package that allows you to work with immutable state in a more convenient way. It is based on the copy-on-write mechanism."</blockquote>
+      <div className="alert alert-info">
+        <h4 class="alert-heading">Immer</h4>
+        <p>
+          Im Rahmen des Tutorials wird auf das Package{" "}
+          <strong>
+            <a href="https://github.com/immerjs/immer#readme" target="_blank" rel="noreferrer">
+              Immer
+            </a>
+          </strong>{" "}
+          zur State-Manipulation zurückgegriffen.
+        </p>
+        <hr />
+        <p>"Immer (German for: always) is a tiny package that allows you to work with immutable state in a more convenient way. It is based on the copy-on-write mechanism."</p>
+      </div>
 
-      <h4>Hooks</h4>
+      <h4 className="mt-5">Hooks</h4>
       <p>
         <strong>Hooks</strong> sind spezielle Funktionen, mit denen man sich in React-Zustands- und Lebenszyklus-Features von function components "einklinken" kann. Sie funktionieren nicht innerhalb von Klassen aber ermöglichen es, React ohne Klassen zu verwenden.
       </p>
@@ -130,7 +135,7 @@ function Dokumentation() {
         mehr erfahren.
       </p>
       <p>Im Folgenden werden die beiden bekanntesten Hooks vorgestellt:</p>
-      <h5>useState()</h5>
+      <h5 className="mt-5">useState()</h5>
       <p>
         <code>useState</code> ist ein Hook, mit dem man states zu einer function component hinzufügen kann.
       </p>
@@ -141,7 +146,7 @@ function Dokumentation() {
 
       <CodeBlock text={exampleCode.stateExample} language={"jsx"} showLineNumbers={false} theme={codepen} />
 
-      <h5 className="mt-3">useEffect()</h5>
+      <h5 className="mt-5">useEffect()</h5>
       <p>
         Im Gegensatz zu <code>useState</code> kann man mit <code>useEffect</code> sogenannte "side effects" in function components ausführen.
       </p>
@@ -157,7 +162,7 @@ function Dokumentation() {
         <code>useEffect</code> kombiniert die Lifecycle Methoden: <code>componentDidMount</code>, <code>componentDidUpdate</code> und <code>componentWillUnmount</code>.
       </p>
       <p>
-        Dem <code>useEffect</code>-Hook kann so beispielsweise ein Argument übergeben werden, dass es ermöglicht, diesen inital beim Laden der Komponente auszuführen oder ihn jedes Mal dann auszuführen, wenn sich ein bestimmer state verändert hat.
+        Dem <code>useEffect</code>-Hook kann so beispielsweise ein Argument übergeben werden, dass es ermöglicht, diesen inital beim Laden der Komponente auszuführen oder ihn jedes Mal dann auszuführen, wenn sich ein bestimmter state verändert hat.
       </p>
 
       <p>
@@ -195,14 +200,6 @@ function Dokumentation() {
           webpack
         </a>{" "}
         dafür, dass der Quellcode live und instant kompiliert werden. Dadurch wird auch der geänderte Quellcode im Browser nahtlos aktualisiert.
-      </p>
-      <p>Man kann ReactJS aber auch als Script-Tag in eine statische HTML-Seite am Ende des HTML-Bodys implementieren.</p>
-      <p>
-        Weiter Informationen findet man{" "}
-        <a href="https://reactjs.org/docs/add-react-to-a-website.html" target="_blank" rel="noreferrer">
-          hier
-        </a>{" "}
-        .
       </p>
       <p>
         Wem das <code>create-react-app</code>-Template zu unübersichtlich ist, kann dieses mit dem Package{" "}
