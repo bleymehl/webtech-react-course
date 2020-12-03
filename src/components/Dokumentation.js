@@ -6,6 +6,10 @@ const exampleCode = {
     return <h1>Hello, {props.name}</h1>;
   }`,
   classComponent: `class Welcome extends React.Component {
+    constructor(props) {
+      super(props);
+    }
+  
     render() {
       return <h1>Hello, {this.props.name}</h1>;
     }`,
@@ -58,29 +62,31 @@ function Dokumentation() {
       <p>Mit Komponenten (im Folgenden components) kann man die Benutzeroberfläche in unabhängige, wiederverwendbare Teile aufteilen und jedes Teil isoliert betrachten. In React gibt es hinsichtlich ihrer Erstellung sowie Funktionalität zwei Arten von components:</p>
       <p>
         <strong>Function Component</strong>
-        <br />
-        <ul>
-          <li>einfachster Weg eine neue Komponente zu definieren</li>
-          <li>es handelt sich dabei um eine klassische JavaScript-Funktion</li>
-          <li>gibt uneingeschränkt Daten zurück</li>
-        </ul>
       </p>
+      <ul>
+        <li>einfachster Weg eine neue Komponente zu definieren</li>
+        <li>es handelt sich dabei um eine klassische JavaScript-Funktion</li>
+        <li>gibt uneingeschränkt Daten zurück</li>
+      </ul>
 
       <CodeBlock text={exampleCode.functionComponent} language={"jsx"} showLineNumbers={false} theme={codepen} />
 
       <p className="mt-3">
         <strong>Class Component</strong>
-        <br />
-        <ul>
-          <li>nutzt ES6-Funktionalität, um eine Class in JavaScript zu erzeugen</li>
-          <li>erweitert die React component class um eigene component subclass und erbt damit auch deren Funktionalität</li>
-          <li>
-            dadurch muss auch eine <code>render()</code>-Methode innerhalb der Klasse aufgerufen werden
-          </li>
-        </ul>
       </p>
+      <ul>
+        <li>nutzt ES6-Funktionalität, um eine Class in JavaScript zu erzeugen</li>
+        <li>erweitert die React component class um eigene component subclass und erbt damit auch deren Funktionalität</li>
+        <li>
+          dadurch muss auch eine <code>render()</code>-Methode innerhalb der Klasse aufgerufen werden
+        </li>
+      </ul>
 
       <CodeBlock text={exampleCode.classComponent} language={"jsx"} showLineNumbers={false} theme={codepen} />
+
+      <p className="alert alert-warning mt-3">
+        Ein untergeordneter Klassenkonstruktor kann erst dann von <code>this</code> Gebrauch machen, wenn <code>super()</code> aufgerufen wurde (ES2015 Spezifikation). Mit <code>super(props)</code> werden dann die <code>props</code> an <code>this</code> übergeben.
+      </p>
 
       <p className="alert alert-info mt-3">Components können in andere components verschachtelt werden. Ebenso kann man function components und class components vermischen.</p>
 
@@ -107,21 +113,6 @@ function Dokumentation() {
         <br />
         <span className="text-muted">Weiterführende Themen: Unidirectional Data Flow, Functional Programming, Immutability</span>
       </p>
-
-      <div className="alert alert-info">
-        <h4 class="alert-heading">Immer</h4>
-        <p>
-          Im Rahmen des Tutorials wird auf das Package{" "}
-          <strong>
-            <a href="https://github.com/immerjs/immer#readme" target="_blank" rel="noreferrer">
-              Immer
-            </a>
-          </strong>{" "}
-          zur State-Manipulation zurückgegriffen.
-        </p>
-        <hr />
-        <p>"Immer (German for: always) is a tiny package that allows you to work with immutable state in a more convenient way. It is based on the copy-on-write mechanism."</p>
-      </div>
 
       <h4 className="mt-5">Hooks</h4>
       <p>
