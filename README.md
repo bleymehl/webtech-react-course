@@ -19,3 +19,9 @@ This application is a dummy newsletter form with live validation, made with the 
 
 3.  run a local server at localhost:3000
 `npm start`
+
+## Template Branch
+This branch contains a basic version of the form validation with a few tasks to do.
+
+## Solution Branch
+This branch is the final solution of the project.
