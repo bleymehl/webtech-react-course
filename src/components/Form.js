@@ -13,18 +13,9 @@ function Form() {
   const formInput = useRef()
   const formCheck = useRef()
 
-  /**
-   * TODO:
-   * state variable "checked" mit useState-Hook erzeugen
-   * default value: false
-   */
   const [checked, setChecked] = useState(false)
 
   /**
-   * TODO:
-   * initial state object "originalState" definieren
-   * email:string(null), error: boolean(false), success:boolean(false)
-   *
    * email: Input, der über das Input-Feld in der Form generiert wird
    * error: abhängig von der Validierung der E-Mail-Adresse
    * success: abhängig davon, ob die Checkbox checked ist und es keine Fehler gibt.
@@ -189,11 +180,6 @@ function Form() {
             </div>
           </div>
         </div>
-        {/**
-         * TODO:
-         * In Abhängigkeit von dem checked state soll
-         * der Submit-Button dis- oder enabled werden.
-         */}
         <button type="submit" className="btn btn-primary btn-sm" disabled={!checked}>
           Absenden
         </button>
